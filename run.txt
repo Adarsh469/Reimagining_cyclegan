@@ -1,0 +1,90 @@
+This file has basic instructions to run each loss function we made.
+
+Note: Use WnB or html file to visualise the training
+to run html file command is 
+xdg-open checkpoints/E1/web/index.html
+
+Baseline model(E1) - Training
+python train.py \
+  --dataroot ./datasets/art_dataset \
+  --name E1 \
+  --model cycle_gan \
+  --batch_size 1 --load_size 256 --crop_size 192 \
+  --n_epochs 50 --n_epochs_decay 50 \
+  --save_epoch_freq 10
+
+Baseline model(E1) - Testing
+python test.py \
+  --dataroot ./datasets/art_dataset \
+  --name E1 \
+  --model cycle_gan \
+  --phase test --epoch latest \
+  --num_test 100
+
+LSGAN loss model(E2) - Training
+python train.py \
+  --dataroot ./datasets/art_dataset \
+  --name E2 \
+  --model cycle_gan_E2 \
+  --batch_size 1 --load_size 256 --crop_size 192 \
+  --n_epochs 50 --n_epochs_decay 50 \
+  --save_epoch_freq 10
+
+LSGAN loss model(E2) - Testing
+python test.py \
+  --dataroot ./datasets/art_dataset \
+  --name E2 \
+  --model cycle_gan_E2 \
+  --phase test --epoch latest \
+  --num_test 100
+
+WGAN-GP loss model(E3) - Training
+python train.py \
+  --dataroot ./datasets/art_dataset \
+  --name E3 \
+  --model cycle_gan_E3 \
+  --batch_size 1 --load_size 256 --crop_size 192 \
+  --n_epochs 50 --n_epochs_decay 50 \
+  --save_epoch_freq 10
+
+WGAN-GP loss model(E3) - Testing
+python test.py \
+  --dataroot ./datasets/art_dataset \
+  --name E3 \
+  --model cycle_gan_E3 \
+  --phase test --epoch latest \
+  --num_test 100
+
+HINGE loss model (E4) - Training
+python train.py \
+  --dataroot ./datasets/art_dataset \
+  --name E4 \
+  --model cycle_gan_E4 \
+  --batch_size 1 --load_size 256 --crop_size 192 \
+  --n_epochs 50 --n_epochs_decay 50 \
+  --save_epoch_freq 10
+
+HINGE loss model (E4) - Testing
+python test.py \
+  --dataroot ./datasets/art_dataset \
+  --name E4 \
+  --model cycle_gan_E4 \
+  --phase test --epoch latest \
+  --num_test 100
+
+RaGAN model (E5) - Training
+python train.py \
+  --dataroot ./datasets/art_dataset \
+  --name E5 \
+  --model cycle_gan_E5 \
+  --batch_size 1 --load_size 256 --crop_size 192 \
+  --n_epochs 50 --n_epochs_decay 50 \
+  --save_epoch_freq 10
+
+RaGAN model (E5) - Testing
+python test.py \
+  --dataroot ./datasets/art_dataset \
+  --name E5 \
+  --model cycle_gan_E5 \
+  --phase test --epoch latest \
+  --num_test 100

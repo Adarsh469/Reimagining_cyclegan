@@ -6,7 +6,7 @@ from . import networks
 from pytorch_msssim import ssim
 
 
-class CycleGANModel(BaseModel):
+class CustomModel(BaseModel):
     """
     This class implements the CycleGAN model, for learning image-to-image translation without paired data.
 

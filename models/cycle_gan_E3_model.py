@@ -2,10 +2,7 @@ import torch
 import torch.autograd as autograd
 from .cycle_gan_model import CycleGANModel as BaseCycleGANModel
 
-
-# -------------------------
 # Gradient Penalty
-# -------------------------
 def compute_gp(D, real, fake):
     alpha = torch.rand(real.size(0), 1, 1, 1).to(real.device)
     interpolates = (alpha * real + (1 - alpha) * fake).requires_grad_(True)

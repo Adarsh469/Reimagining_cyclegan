@@ -35,7 +35,7 @@ if __name__ == "__main__":
     print(f"The number of training images = {dataset_size}")
 
     model = create_model(opt)  # create a model given opt.model and other options
-    model.setup(opt)  # regular setup: load and print networks; create schedulers
+    model.setup(opt,'RaGAN')  # regular setup: load and print networks; create schedulers
     visualizer = Visualizer(opt)  # create a visualizer that display/save images and plots
     total_iters = 0  # the total number of training iterations
     for epoch in range(opt.epoch_count, opt.n_epochs + opt.n_epochs_decay + 1):

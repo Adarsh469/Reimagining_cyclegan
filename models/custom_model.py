@@ -80,7 +80,7 @@ class CustomModel(BaseModel):
         self.netG_A = networks.define_G(opt.input_nc, opt.output_nc, opt.ngf, opt.netG, opt.norm, not opt.no_dropout, opt.init_type, opt.init_gain)
         self.netG_B = networks.define_G(opt.output_nc, opt.input_nc, opt.ngf, opt.netG, opt.norm, not opt.no_dropout, opt.init_type, opt.init_gain)
         
-        self.loss_type = 'ssim'
+        self.loss_type = 'RaGAN'
 
         if self.isTrain:  # define discriminators
             self.netD_A = networks.define_D(opt.output_nc, opt.ndf, opt.netD, opt.n_layers_D, opt.norm, opt.init_type, opt.init_gain)
@@ -94,7 +94,6 @@ class CustomModel(BaseModel):
             # define loss functions
             self.criterionGAN = networks.GANLoss(opt.gan_mode).to(self.device)  # define GAN loss.
             if self.loss_type == 'L2':
-                print('using L2')
                 self.criterionCycle = torch.nn.MSELoss()
             else:
                 self.criterionCycle = torch.nn.L1Loss()
@@ -176,7 +175,6 @@ class CustomModel(BaseModel):
         """Calculate GAN loss for discriminator D_A"""
         fake_B = self.fake_B_pool.query(self.fake_B)
         if self.loss_type == 'RaGAN':
-            print('using ragan')
             self.loss_D_A = self.lossRaGan(self.netD_A, self.real_B, fake_B)
         else:
             self.loss_D_A = self.backward_D_basic(self.netD_A, self.real_B, fake_B)
@@ -211,7 +209,6 @@ class CustomModel(BaseModel):
         # GAN loss D_B(G_B(B))
         self.loss_G_B = self.criterionGAN(self.netD_B(self.fake_A), True)
         if self.loss_type == 'ssim':
-            print('using ssim')
             self.loss_cycle_A = (1 - ssim(self.rec_A, self.real_A, data_range=1.0)) * lambda_A
             self.loss_cycle_B = (1 - ssim(self.rec_B, self.real_B, data_range=1.0)) * lambda_B
         else:
